@@ -1,0 +1,14 @@
+﻿  Car.cpp
+  CIS247C_CourseProject.cpp
+  ElectricCar.cpp
+  Engine.cpp
+  GasCar.cpp
+  SUV.cpp
+C:\Users\coold\source\repos\CIS247C_CourseProject\CIS247C_CourseProject\SUV.cpp(6,13): warning C4244: '=': conversion from 'float' to 'short', possible loss of data
+C:\Users\coold\source\repos\CIS247C_CourseProject\CIS247C_CourseProject\SUV.cpp(14,15): warning C4244: 'argument': conversion from 'float' to 'short', possible loss of data
+C:\Users\coold\source\repos\CIS247C_CourseProject\CIS247C_CourseProject\SUV.cpp(43,9): warning C4244: 'return': conversion from 'float' to 'short', possible loss of data
+  Vehicle.cpp
+C:\Users\coold\source\repos\CIS247C_CourseProject\CIS247C_CourseProject\Vehicle.cpp(38,17): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+  Generating Code...
+  LINK : C:\Users\coold\source\repos\CIS247C_CourseProject\x64\Debug\CIS247C_CourseProject.exe not found or not built by the last incremental link; performing full link
+  CIS247C_CourseProject.vcxproj -> C:\Users\coold\source\repos\CIS247C_CourseProject\x64\Debug\CIS247C_CourseProject.exe
