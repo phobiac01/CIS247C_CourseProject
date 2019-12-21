@@ -18,34 +18,33 @@ CIS247C Course Project
 using namespace std;
 
 ///Prototypes
-void saveToFile(ElectricCar* ptrElectric);
-void saveToFile(GasCar* ptrGas);
-void saveToFile(SUV* ptrSuv);
-void saveToFile(Car* ptrCar);
 void saveToFile(Vehicle* ptrVehicle);
+string determineChildType(Vehicle* ptrVehicle);
 
-/// Comment and submit ///
 
 int main() {
-    Vehicle vhcl1("9AASKJDBAK791KJK7", "Kia", "Forte", 2014, 2000, Engine(4, 125));
-    Car car1("5NPDH4AEXDH356271", "Ford", "Mustang", 2010, 8500.0, 2, false, Engine(6, 315));
-    SUV suv1("982KAJS82JKASJ56G", "Brand", "CarName", 2000, 12000, 6, 12, Engine(4, 150));
-    GasCar gas1("5NPJ873X34K356271", "Miso", "Odyssey", 2010, 8500.0, 4, false, 12.0, 15, Engine(4, 250));
-    ElectricCar elec1("H37DO4AEHAOD62271", "Tesla", "Roadster", 2018, 80000, 2, false, 2000, 400, 25, Engine(0, 300));
+    const int NUM_CARS = 4;
+    Vehicle* vehicles[NUM_CARS];
+
+    //Vehicle vhcl1("9AASKJDBAK791KJK7", "Kia", "Forte", 2014, 2000, Engine(4, 125));
+    vehicles[0] = new Car("5NPDH4AEXDH356271", "Ford", "Mustang", 2010, 8500.0, 2, false, Engine(6, 315));
+    vehicles[1] = new SUV("982KAJS82JKASJ56G", "Brand", "CarName", 2000, 12000, 6, 12, Engine(4, 150));
+    vehicles[2] = new GasCar("5NPJ873X34K356271", "Miso", "Odyssey", 2010, 8500.0, 4, false, 12.0, 15, Engine(4, 250));
+    vehicles[3] = new ElectricCar("H37DO4AEHAOD62271", "Tesla", "Roadster", 2018, 80000, 2, false, 2000, 400, 25, Engine(0, 300));
 
     //Print the byte size of variable and its pointer
-    cout << "Size of Car object: " << sizeof(car1) << endl;
-    cout << "Size of pointer: " << sizeof(&car1) << endl;
+    cout << "Size of Vehicle pointer: " << sizeof(vehicles[0]) << endl;
+    cout << "Size of Vehicle object (dereferenced): " << sizeof(*vehicles[0]) << endl;
     cout << endl;
 
     remove("data.txt");
 
     //Save car objects to file
-    saveToFile(&elec1);
-    saveToFile(&gas1);
-    saveToFile(&suv1);
-    saveToFile(&car1);
-    saveToFile(&vhcl1);
+    //And delete heap memory
+    for (int i = 0; i < NUM_CARS; i++) {
+        saveToFile(vehicles[i]);
+        delete vehicles[i];
+    }
 
     cout << endl;
     system("PAUSE");
@@ -57,104 +56,15 @@ int main() {
 
 
 
-void saveToFile(ElectricCar* ptrElectric)
-{
-    ofstream outToFile("data.txt", ios::app);
-
-    if (outToFile.is_open()) {
-
-        outToFile << ptrElectric->getVin() << ','
-            << ptrElectric->getMake() << ','
-            << ptrElectric->getModel() << ','
-            << ptrElectric->getYear() << ','
-            << ptrElectric->getPrice() << ','
-            << ptrElectric->getNumDoors() << ','
-            << ptrElectric->getHatchBack() << ','
-            << ptrElectric->getBatterySize() << ','
-            << ptrElectric->getRange() << ','
-            << ptrElectric->getMpgE() << ','
-            << ptrElectric->getMotor().getNumCylinders() << ','
-            << ptrElectric->getMotor().getHorsePower() << ',';
-
-        outToFile.close();
-
-        cout << ptrElectric->getMake() << " " << ptrElectric->getModel() << " was written to the file!" << endl;
-    }
-}
-
-void saveToFile(GasCar* ptrGas)
-{
-    ofstream outToFile("data.txt", ios::app);
-
-    if (outToFile.is_open()) {
-
-        outToFile << ptrGas->getVin() << ','
-            << ptrGas->getMake() << ','
-            << ptrGas->getModel() << ','
-            << ptrGas->getYear() << ','
-            << ptrGas->getPrice() << ','
-            << ptrGas->getNumDoors() << ','
-            << ptrGas->getHatchBack() << ','
-            << ptrGas->getTankSize() << ','
-            << ptrGas->getMpg() << ','
-            << ptrGas->getMotor().getNumCylinders() << ','
-            << ptrGas->getMotor().getHorsePower() << ',';
-
-        outToFile.close();
-
-        cout << ptrGas->getMake() << " " << ptrGas->getModel() << " was written to the file!" << endl;
-    }
-}
-
-void saveToFile(SUV* ptrSuv)
-{
-    ofstream outToFile("data.txt", ios::app);
-
-    if (outToFile.is_open()) {
-
-        outToFile << ptrSuv->getVin() << ','
-            << ptrSuv->getMake() << ','
-            << ptrSuv->getModel() << ','
-            << ptrSuv->getYear() << ','
-            << ptrSuv->getPrice() << ','
-            << ptrSuv->getNumSeats() << ','
-            << ptrSuv->getCargoSize() << ','
-            << ptrSuv->getMotor().getNumCylinders() << ','
-            << ptrSuv->getMotor().getHorsePower() << ',';
-
-        outToFile.close();
-
-        cout << ptrSuv->getMake() << " " << ptrSuv->getModel() << " was written to the file!" << endl;
-    }
-}
-
-//Saves the variable to a file via pointer
-void saveToFile(Car* ptrCar) {
-    ofstream outToFile("data.txt", ios::app);
-
-    if (outToFile.is_open()) {
-
-        outToFile << ptrCar->getVin() << ','
-            << ptrCar->getMake() << ','
-            << ptrCar->getModel() << ','
-            << ptrCar->getYear() << ','
-            << ptrCar->getPrice() << ','
-            << ptrCar->getNumDoors() << ','
-            << ptrCar->getHatchBack() << ','
-            << ptrCar->getMotor().getNumCylinders() << ','
-            << ptrCar->getMotor().getHorsePower() << ',';
-
-        outToFile.close();
-
-        cout << ptrCar->getMake() << " " << ptrCar->getModel() << " was written to the file!" << endl;
-    }
-}
-
 void saveToFile(Vehicle* ptrVehicle)
 {
     ofstream outToFile("data.txt", ios::app);
 
+    string childType = determineChildType(ptrVehicle);
+
     if (outToFile.is_open()) {
+
+        outToFile << childType << ",";
 
         outToFile << ptrVehicle->getVin() << ','
             << ptrVehicle->getMake() << ','
@@ -164,8 +74,51 @@ void saveToFile(Vehicle* ptrVehicle)
             << ptrVehicle->getMotor().getNumCylinders() << ','
             << ptrVehicle->getMotor().getHorsePower() << ',';
 
+        if (childType == "SUV") {
+            SUV* s1 = dynamic_cast<SUV*>(ptrVehicle);
+            outToFile << "," << s1->getNumSeats() << "," << s1->getCargoSize();
+        }
+
+        if (childType == "Car") {
+            Car* c1 = dynamic_cast<Car*>(ptrVehicle);
+            outToFile << "," << c1->getNumDoors() << "," << c1->getHatchBack();
+        }
+
+        if (childType == "ElectricCar") {
+            ElectricCar* e1 = dynamic_cast<ElectricCar*>(ptrVehicle);
+            outToFile << "," << e1->getBatterySize() << "," << e1->getRange() << "," << e1->getMpgE();
+        }
+
+        if (childType == "GasCar") {
+            GasCar* g1 = dynamic_cast<GasCar*>(ptrVehicle);
+            outToFile << "," << g1->getTankSize() << "," << g1->getMpg();
+        }
+      
+
+        outToFile << endl;
         outToFile.close();
 
         cout << ptrVehicle->getMake() << " " << ptrVehicle->getModel() << " was written to the file!" << endl;
     }
+}
+
+
+string determineChildType(Vehicle* ptrVehicle) {
+    ElectricCar* e1 = dynamic_cast<ElectricCar*>(ptrVehicle);
+    if (e1 != nullptr)
+        return "ElectricCar";
+
+    GasCar* g1 = dynamic_cast<GasCar*>(ptrVehicle);
+    if (g1 != nullptr)
+        return "GasCar";
+
+    Car* c1 = dynamic_cast<Car*>(ptrVehicle);
+    if (c1 != nullptr)
+        return "Car";
+
+    SUV* s1 = dynamic_cast<SUV*>(ptrVehicle);
+    if (s1 != nullptr)
+        return "SUV";
+
+    return "error";
 }

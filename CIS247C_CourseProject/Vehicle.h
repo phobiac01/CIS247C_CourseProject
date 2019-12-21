@@ -6,7 +6,7 @@ using namespace std;
 
 class Vehicle
 {
-private:
+protected:
 	string vin;
 	string make;
 	string model;
@@ -17,7 +17,7 @@ private:
 public:
 	Vehicle();
 	Vehicle(string vin, string make, string model, short year, double price, Engine motor);
-	virtual ~Vehicle();
+	virtual ~Vehicle() = 0;
 
 	///Behaviors
 	virtual string toString();
