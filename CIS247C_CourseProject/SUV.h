@@ -12,7 +12,8 @@ private:
 
 public:
 	SUV();
-	SUV(string vin, string make, string model, short year, double price, short numSeats, float cargoSize, Engine motor);
+	SUV(string vin, string make, string model, short year, double price, 
+		short numSeats, float cargoSize, Engine motor);
 	virtual ~SUV();
 
 	string toString();

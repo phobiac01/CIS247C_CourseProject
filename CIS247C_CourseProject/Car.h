@@ -14,7 +14,8 @@ private:
 public:
 	///Constructors and destructor
 	Car();
-	Car(string vin, string make, string model, short year, double price, short numDoors, bool hatchBack, Engine motor);
+	Car(string vin, string make, string model, short year, double price, 
+		short numDoors, bool hatchBack, Engine motor);
 	~Car();
 
 	//Behaviors

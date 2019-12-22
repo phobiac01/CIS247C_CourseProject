@@ -12,7 +12,8 @@ private:
 
 public:
 	GasCar();
-	GasCar(string vin, string make, string model, short year, double price, short numDoors, bool hatchBack, float tankSize, short mpg, Engine motor);
+	GasCar(string vin, string make, string model, short year, double price, short numDoors, 
+		bool hatchBack, float tankSize, short mpg, Engine motor);
 	virtual ~GasCar();
 
 	string toString();
